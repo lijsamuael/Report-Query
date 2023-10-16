@@ -1,0 +1,80 @@
+<h2 class="text-center">{%= __("Statement of Account") %}</h2>
+<h5 class="text-center">
+    {%= frappe.datetime.str_to_user(filters.from_date) %}
+    {%= __("to") %}
+    {%= frappe.datetime.str_to_user(filters.to_date) %}
+
+    <script>
+        var toDate = new Date("{%= filters.to_date %}");
+        var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var monthName = monthNames[toDate.getMonth()];
+		console.log("ldjflkdj");
+		console.log("dkldkl", {%= data[0] %})
+        document.write(monthName);
+    </script>
+</h5>
+<hr>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th style="width: 12%">{%= __("No") %}</th>
+			<th style="width: 15%">{%= __("Full Name") %}</th>
+			<!-- <th style="width: 25%">{%= __("Basic Salary") %}</th>
+			<th style="width: 15%">{%= __("Worked Days") %}</th>
+			<th style="width: 15%">{%= __("Taxable All.") %}</th>
+			<th style="width: 18%">{%= __("Non Taxable All") %}</th>
+			<th style="width: 18%">{%= __("OT Payment") %}</th>
+			<th style="width: 18%">{%= __("Gross Earning") %}</th>
+			<th style="width: 18%">{%= __("Taxable Earning") %}</th>
+			<th style="width: 18%">{%= __("Income Tax") %}</th>
+			<th style="width: 18%">{%= __("Pension Fund") %}</th>
+			<th style="width: 18%">{%= __("Total Deduction") %}</th>
+			<th style="width: 18%">{%= __("Net Pay") %}</th>
+			<th style="width: 18%">{%= __("Signiture") %}</th> -->
+		</tr>
+	</thead>
+	<tbody>
+		{% for(var i=0, l=data.length; i<l; i++) { %}
+			<tr>
+				<td>{%= data[i].project %}</td>
+				<td>{%= data[i].employee_name %}</td>
+				<!-- <td>{%= data[i].voucher_type %}
+					<br>{%= data[i].voucher_no %}
+				</td>
+				{% var longest_word = cstr(data[i].remarks).split(" ").reduce((longest, word) => word.length > longest.length ? word : longest, ""); %}
+				<td {% if longest_word.length > 45 %} class="overflow-wrap-anywhere" {% endif %}>
+					<span>
+					{% if(!(filters.party || filters.account)) { %}
+						{%= data[i].party || data[i].account %}
+						<br>
+					{% } %}
+
+					<br>{%= __("Remarks") %}: {%= data[i].remarks %}
+					{% if(data[i].bill_no) { %}
+						<br>{%= __("Supplier Invoice No") %}: {%= data[i].bill_no %}
+					{% } %}
+					</span>
+				</td>
+				<td style="text-align: right">
+					{%= format_currency(data[i].debit, filters.presentation_currency) %}
+				</td>
+				<td style="text-align: right">
+					{%= format_currency(data[i].credit, filters.presentation_currency) %}
+				</td>
+				<td></td>
+				<td></td>
+				<td><b>{%= frappe.format(data[i].account, {fieldtype: "Link"}) || "&nbsp;" %}</b></td>
+				<td style="text-align: right">
+					{%= data[i].account && format_currency(data[i].debit, filters.presentation_currency || data[i].account_currency) %}
+				</td>
+				<td style="text-align: right">
+					{%= data[i].account && format_currency(data[i].credit, filters.presentation_currency || data[i].account_currency) %}
+				</td>
+				<td style="text-align: right">
+					{%= format_currency(data[i].balance, filters.presentation_currency || data[i].account_currency) %}
+				</td> -->
+			</tr>
+		{% } %}
+	</tbody>
+</table>
+<p class="text-right text-muted">Printed On {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}</p>
